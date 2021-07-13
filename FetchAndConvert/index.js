@@ -18,21 +18,12 @@ module.exports = async function (context, req) {
 
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    try {
-        await page.goto(url, {
-            waitUntil: 'networkidle2',
-        });
-        await page.emulateMediaType('screen');
-        await page.pdf({ path: path, format: 'a4' });
-        await browser.close();
-    } catch (error) {
-        context.res = {
-            status: 500,
-            body: { error: error.message }
-        };
-        return;
-    }
-
+    await page.goto(url, {
+        waitUntil: 'networkidle2',
+    });
+    await page.emulateMediaType('screen');
+    await page.pdf({ path: path, format: 'a4' });
+    await browser.close();
 
     const fileBuffer = fs.readFileSync(path);
     context.res = {
