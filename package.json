@@ -7,7 +7,6 @@
   },
   "author": "",
   "dependencies": {
-    "playwright-chromium": "^1.12.3",
     "puppeteer": "^10.1.0"
   }
 }
